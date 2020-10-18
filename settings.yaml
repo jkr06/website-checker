@@ -1,0 +1,20 @@
+default:
+  KAFKA_BROKER_URL: kafka://localhost:9092
+  WEBSITES: {
+    "https://google.com": ["Feeling Lucky", "something"],
+    "https://example.org": ["Example Domain"]
+  }
+  DATABASE:
+      dbname: websitecheck
+      user: postgres
+      password: mysecretpassword
+      host: 0.0.0.0
+      port: 5432
+staging:
+  KAFKA_BROKER_URL: kafka://kafka1
+
+production:
+  KAFKA_BROKER_URL: ["kafka://kafka1", "kafka://kafka2", "kafka://kafka3"]
+
+testing:
+  KAFKA_BROKER_URL: kafka://kafka
