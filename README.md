@@ -88,3 +88,8 @@ Run consumer
 ENV_FOR_DYNACONF=production faust -A consumer:app worker -l info --without-web
 `
 
+### Thanks
+
+faust(https://github.com/robinhood/faust)
+aiopg(https://github.com/aio-libs/aiopg)
+httpx(https://github.com/encode/httpx)
