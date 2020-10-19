@@ -17,4 +17,16 @@ production:
   KAFKA_BROKER_URL: ["kafka://kafka1", "kafka://kafka2", "kafka://kafka3"]
 
 testing:
+  DATABASE:
+      dbname: testdb
+      user: postgres
+      password: secret
+      host: 0.0.0.0
+      port: 16766
+  WEBSITES: {
+    "http://test1_url": ["test123", "test789"],
+    "http://test2_url": ["test123"],
+    "http://test3_url": [],
+  }
+
   KAFKA_BROKER_URL: kafka://kafka

@@ -1,10 +1,10 @@
+import asyncio
+from datetime import datetime
 import logging
 import pytz
 import re
 import typing
-import asyncio
 
-from datetime import datetime
 from dynaconf import settings
 import faust
 import httpx
@@ -26,7 +26,7 @@ async def check_websites():
         await asyncio.sleep(1)
 
 
-async def check_single(site):
+async def check_single(site: str):
     async with httpx.AsyncClient() as client:
         response = await client.get(site)
     event = StatusEvent(

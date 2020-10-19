@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 
 
 @app.agent(events_topic)
-async def process_event(events: typing.List[StatusEvent]) -> None:
+async def process_event(events: typing.List[StatusEvent]):
     """
     Process events in 'events' topic.
 
@@ -24,17 +24,18 @@ async def process_event(events: typing.List[StatusEvent]) -> None:
     async for event in events:
         log.info(event)
         await handle_event(event)
+        yield event
 
     log.info("shutting down, releasing DB pool")
     await ConnPool.clear()
 
 
-async def handle_event(event):
+async def handle_event(event: StatusEvent):
     pool = await ConnPool.pool()
     async with pool.acquire() as conn:
         async with conn.cursor() as cur:
             await cur.execute(
-                f"INSERT INTO checker_event (url, http_status, response_time, "
+                f"INSERT INTO events (url, http_status, response_time, "
                 f"event_time, search_results) VALUES "
                 f"('{event.url}', '{event.http_status}', '{event.response_time}', "
                 f"'{event.event_time}', '{json.dumps(event.search_results)}')"
