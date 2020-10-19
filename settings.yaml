@@ -1,5 +1,6 @@
 default:
   KAFKA_BROKER_URL: kafka://localhost:9092
+  USE_SASL: False
   WEBSITES: {
     "https://google.com": ["Feeling Lucky", "something"],
     "https://example.org": ["Example Domain"]

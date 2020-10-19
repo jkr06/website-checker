@@ -34,7 +34,7 @@ def initialize_db(cursor):
 
 if __name__ == "__main__":
     print("creating database ", settings.DATABASE.dbname)
-    create_db(**(dict(settings.DATABASE)), default_db=settings.DEFAULT_DB)
+    create_db(**(dict(settings.DATABASE)), default_db=settings.get("DEFAULT_DB"))
 
     print("initializing database")
     conn = psycopg2.connect(**(dict(settings.DATABASE)))
