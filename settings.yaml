@@ -7,7 +7,7 @@ default:
   DATABASE:
       dbname: websitecheck
       user: postgres
-      password: mysecretpassword
+      password: secret
       host: 0.0.0.0
       port: 5432
 
