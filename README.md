@@ -25,9 +25,12 @@ Start Postgres
 docker run --name postgres -v /Users/jkatika/website-cheker/testdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres:latest
 `
 
-Create database and initialize database
+Create environment, create database and initialize database
 
-`python initdb.py`
+```
+poetry install
+python initdb.py
+```
 
 Run producer
 
