@@ -3,6 +3,7 @@ from datetime import datetime
 import logging
 import pytz
 import re
+import ssl
 import typing
 
 from dynaconf import settings
@@ -11,7 +12,22 @@ import httpx
 
 from models import StatusEvent
 
-app = faust.App("checkwebsite", broker=settings.KAFKA_BROKER_URL)
+if settings.USE_SASL:
+    ssl_context = ssl.create_default_context(
+        purpose=ssl.Purpose.SERVER_AUTH, cafile=settings.CA_FILE
+    )
+    app = faust.App(
+        "checkwebsite",
+        topic_disable_leader=True,
+        broker=settings.KAFKA_BROKER_URL,
+        broker_credentials=faust.SASLCredentials(
+            ssl_context=ssl_context,
+            username=settings.KAFKA_USER,
+            password=settings.KAFKA_PASSWORD,
+        ),
+    )
+else:
+    app = faust.App("checkwebsite", broker=settings.KAFKA_BROKER_URL)
 
 events_topic = app.topic("events", value_type=StatusEvent)
 
