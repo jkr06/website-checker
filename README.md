@@ -22,7 +22,7 @@ bin/zookeeper-server-start.sh config/zookeeper.properties
 Start Postgres
 
 `
-docker run --name postgres -v /Users/jkatika/website-cheker/testdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres:latest
+docker run --name postgres -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres:latest
 `
 
 Create environment, create database and initialize database
