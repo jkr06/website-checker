@@ -18,7 +18,7 @@ from producer import check_single
 
 @pytest.fixture(scope="session")
 def setup_database():
-    """ Fixture to set up the in-memory database with test data """
+    """ Fixture to set up the postgres database """
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
     db = settings.DATABASE
 
