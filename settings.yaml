@@ -1,32 +1,33 @@
 default:
-  KAFKA_BROKER_URL: kafka://localhost:9092
-  USE_SASL: False
-  WEBSITES: {
-    "https://google.com": ["Feeling Lucky", "something"],
-    "https://example.org": ["Example Domain"]
+  kafka_broker_url: kafka://localhost:9092
+  use_sasl: false
+  websites: {
+    "https://google.com": ["feeling lucky", "something"],
+    "https://example.org": ["example domain"]
   }
-  DATABASE:
+  database:
       dbname: websitecheck
       user: postgres
       password: secret
       host: 0.0.0.0
       port: 5432
+  default_db: null
 
 staging:
-  KAFKA_BROKER_URL: kafka://kafka1
-  USE_SASL: True
+  kafka_broker_url: kafka://kafka1
+  use_sasl: true
 
 testing:
-  DATABASE:
+  database:
       dbname: testdb
       user: postgres
       password: secret
       host: 0.0.0.0
       port: 16766
-  WEBSITES: {
+  websites: {
     "http://test1_url": ["test123", "test789"],
     "http://test2_url": ["test123"],
     "http://test3_url": [],
   }
 
-  KAFKA_BROKER_URL: kafka://kafka
+  kafka_broker_url: kafka://kafka
