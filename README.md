@@ -25,9 +25,12 @@ Start Postgres
 docker run --name postgres -v /Users/jkatika/website-cheker/testdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres:latest
 `
 
-Create database and initialize database
+Create environment, create database and initialize database
 
-`python initdb.py`
+```
+poetry install
+python initdb.py
+```
 
 Run producer
 
@@ -85,3 +88,10 @@ Run consumer
 ENV_FOR_DYNACONF=production faust -A consumer:app worker -l info --without-web
 `
 
+### Thanks
+
+faust(https://github.com/robinhood/faust)
+
+aiopg(https://github.com/aio-libs/aiopg)
+
+httpx(https://github.com/encode/httpx)
