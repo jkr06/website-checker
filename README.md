@@ -35,7 +35,7 @@ python initdb.py
 Run producer
 
 `
-python producer.py
+faust -A producer:app worker -l info --without-web
 `
 
 Run consumer
@@ -57,20 +57,20 @@ From the overview page in Aiven console, get the details and create a settings.l
 
 ```
 production:
-  KAFKA_BROKER_URL: ["kafka-12345.aivencloud.com:21677"]
-  USE_SASL: True
-  KAFKA_USER: *****
-  KAFKA_PASSWORD: *****
-  CA_FILE: ./ca.pem
-  CLIENT_KEY: ./client.key
-  CLIENT_CERT: ./client.cert
-  DATABASE:
+  kafka_broker_url: ["kafka-12345.aivencloud.com:21677"]
+  use_sasl: true
+  kafka_user: *****
+  kafka_password: *****
+  ca_file: ./ca.pem
+  client_key: ./client.key
+  client_cert: ./client.cert
+  database:
       dbname: websitecheck
       user: *****
       password: *****
       host: pg-12345.aivencloud.com
       port: 21664
-  DEFAULT_DB: defaultdb
+  default_db: defaultdb
 ```
 Create database and initialize database
 
@@ -79,7 +79,7 @@ Create database and initialize database
 Run Producer
 
 `
-ENV_FOR_DYNACONF=production python producer.py
+ENV_FOR_DYNACONF=production faust -A producer:app worker -l info --without-web
 `
 
 Run consumer

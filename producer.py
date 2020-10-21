@@ -34,12 +34,10 @@ events_topic = app.topic("events", value_type=StatusEvent)
 log = logging.getLogger("producer")
 
 
+@app.timer(settings.PRODUCER_FREQUENCY)
 async def check_websites():
-    while True:
-        coros = [check_single(site) for site in settings.WEBSITES.keys()]
-        await asyncio.gather(*coros)
-
-        await asyncio.sleep(1)
+    coros = [check_single(site) for site in settings.WEBSITES.keys()]
+    await asyncio.gather(*coros)
 
 
 async def check_single(site: str):
@@ -57,9 +55,3 @@ async def check_single(site: str):
     }
     await events_topic.send(value=event)
     log.info("event sent %s", event)
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(check_websites())

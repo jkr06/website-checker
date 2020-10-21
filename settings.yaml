@@ -5,6 +5,7 @@ default:
     "https://google.com": ["feeling lucky", "something"],
     "https://example.org": ["example domain"]
   }
+  producer_frequency: 1
   database:
       dbname: websitecheck
       user: postgres
