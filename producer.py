@@ -18,7 +18,6 @@ if settings.USE_SASL:
     )
     app = faust.App(
         "checkwebsite",
-        topic_disable_leader=True,
         broker=settings.KAFKA_BROKER_URL,
         broker_credentials=faust.SASLCredentials(
             ssl_context=ssl_context,
